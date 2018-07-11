@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+			<h4>Register</h4>
+
+			  <div>
+			    <% if flash[:errors] %>
+			      <% flash[:errors].each do |error| %>
+			        <p><font color= "red"><%= error %></font></p>
+			      <% end%>
+			    <% end %>
+			  </div>
+
+
+			<form action ="/users" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+				
+			<div class="form-group">
+				<label>First Name </label>
+				<input class="form-control" type="text" name="user[first_name]"/>
+			</div>
+
+			<div class="form-group">
+				<label>Last Name </label>
+				<input class="form-control" type="text" name="user[last_name]"/>
+			</div>
+
+			<div class="form-group">
+				<label>Email </label>
+				<input class="form-control" type="email" name="user[email]"/>
+			</div>	
+
+			<div class="form-group">	
+				<label>City </label>
+				<input class="form-control" type="text" name="user[city]"/>
+			</div>	
+
+				<label>State </label>
+				<select class="form-control" name="user[state]">
+					  <option value="Texas">TX </option>
+					  <option value="Arizona">AZ</option>
+					  <option value="California">CA</option>
+					  <option value="Washington">WA</option>
+					  <option value="Pennsylvania">PA </option>
+					  <option value="Florida">FL</option>
+					  <option value="Louisiana">LA</option>
+					  <option value="Kansas">KS</option>
+					  <option value="Wisconsin">WI</option>
+					  <option value="Oklahoma">OK</option>
+				</select>
+
+			<div class="form-group">	
+				<label>Password </label>
+				<input class="form-control" type="password" name="user[password]"/>
+			</div>
+				
+			<div class="form-group">
+				<label>Confrim Password</label>
+				<input class="form-control" type="password" name="user[password_confirmation]"/>
+			</div>	
+
+				<button class="btn btn-outline-success" type="submit">Register</button>
+				
+			</form>
+
+<br>
+<br>
+			<h4>Login</h4>
+			<form action ="/sessions" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+			<div class="form-group">	
+				<label>Email </label>
+				<input class="form-control" type="email" name="email"/>
+			</div>
+
+			<div class="form-group">
+				<label>Password </label>
+				<input class="form-control" type="password" name="password"/>
+			</div>	
+
+				<button class="btn btn-outline-success" type="submit">Login</button>
+
+			</form>	
+
+</div>
+			  <div class ="container">
+			    <% if flash[:login_errors] %>
+			      <h3><font color = "red"> <%= flash[:login_errors]%></font> </h3>
+			      <%end%>
+			  </div> 
+
+
+</body>
+</html>
+
+
+
+   

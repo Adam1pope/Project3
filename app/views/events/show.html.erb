@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Event</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container">
+        <h1> <%= @event.name %> </h1> 
+        <h4>Host: <%= @event.user.first_name %></h4>
+        <h4>Date: <%= @event.date.strftime("%b %d %Y ") %></h4>
+        <h4>Location: <%= @event.city %>, <%= @event.state %></h4><br>
+        <h4>People who are joining the event: <%= @event.users_attended.count %> </h4><br>  <!--users_attended accesses Attended, grabs count -->
+
+        <table class="table">
+
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>State</th>
+              </tr>
+            </thead>
+           
+            <tbody>  
+              <% @event.users_attended.each do |user| %>
+              <tr>
+                <td><%= user.first_name %></td>
+                <td><%= user.city %></td>
+                <td><%= user.state %></td>
+              </tr>
+              <% end %>
+            </tbody>
+
+        </table>
+        <br>
+        <br>
+
+        <h4>Event Discussion: </h4><br>
+
+        <h1><% @event.comments.each do |comment| %> </h1>
+          <h4><%= comment.author %> says: <%= comment.text %> </h4>
+          <p>---------------------------------</p>
+        <% end %> 
+
+         <div>
+            <form action="/events/<%= @event.id %>" method="post">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="textarea" name="comment" cols="40" rows="5">
+              <button type="submit">Add Comment</button>
+            </form>
+          </div>  
+
+         <h3 align="right"><a href="/sessions">Logout</a></h3>
+         <h3 align= "right"> <a href="/events">Event Dashboard</a> </h3>
+
+</div>
+
+</body>
+</html>
+
+
